@@ -1,7 +1,7 @@
 {
 	"name": "vue3-admin",
 	"private": true,
-	"version": "0.0.0",
+	"version": "0.0.1",
 	"scripts": {
 		"dev": "vite",
 		"serve": "vite",
@@ -37,6 +37,8 @@
 		"postcss": "^8.4.21",
 		"postcss-html": "^1.5.0",
 		"prettier": "^2.8.3",
+		"sass": "^1.58.0",
+		"standard-version": "^9.5.0",
 		"stylelint": "^14.16.1",
 		"stylelint-config-html": "^1.1.0",
 		"stylelint-config-prettier": "^9.0.4",
