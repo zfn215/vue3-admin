@@ -2,11 +2,14 @@
  * @Author: zhangfuning 401645191@qq.com
  * @Date: 2023-02-01 11:21:55
  * @LastEditors: zhangfuning 401645191@qq.com
- * @LastEditTime: 2023-02-01 11:42:26
+ * @LastEditTime: 2023-02-02 17:26:11
  * @FilePath: /vue3-admin/src/routers/index.ts
  * @Description: 系统路由
  */
 import { createRouter, createWebHashHistory } from "vue-router";
+// import { staticRouter } from "./modules/staticRouter";
+import { staticRouter } from "@/routers/modules/staticRouter";
+console.log(staticRouter);
 /**
  * @description: 动态路由参数配置简介
  * @param path ===> 菜单路径
@@ -26,8 +29,9 @@ import { createRouter, createWebHashHistory } from "vue-router";
 
 const router = createRouter({
 	history: createWebHashHistory(),
-	routes: [],
+	routes: [...staticRouter],
 	strict: false,
 	scrollBehavior: () => ({ left: 0, top: 0 })
 });
+console.log(router);
 export default router;
