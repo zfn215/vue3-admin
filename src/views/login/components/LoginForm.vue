@@ -2,7 +2,7 @@
  * @Author: zhangfuning 401645191@qq.com
  * @Date: 2023-02-01 11:08:41
  * @LastEditors: zhangfuning 401645191@qq.com
- * @LastEditTime: 2023-02-02 17:51:38
+ * @LastEditTime: 2023-02-03 11:00:12
  * @FilePath: /vue3-admin/src/views/login/components/LoginForm.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -33,10 +33,49 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { ElfORM } from "element-plus";
+import { Login } from "@/api/interface/index";
+import { loginApi } from "@/api/modules/login";
+import type { ElForm } from "element-plus";
+import md5 from "js-md5";
 const router = useRouter();
 // 定义form校验规则
-type FormInstance = InstanceType<typeof elform>;
+type FormInstance = InstanceType<typeof ElForm>;
+const loginFormRef = ref<FormInstance>();
+const loginRules = reactive({
+	username: [{ required: true, message: "请输入用户名", trigger: "blur" }],
+	password: [{ required: true, message: "请输入密码", trigger: "blur" }]
+});
+const loading = ref(false);
+const loginForm = reactive<Login.ReqLoginForm>({ username: "", password: "" });
+const login = (formEl: FormInstance | undefined) => {
+	if (!formEl) return;
+	formEl.validate(async valid => {
+		if (!valid) return;
+		loading.value = true;
+		try {
+			// 1.执行登录接口
+			const { data } = await loginApi({ ...loginForm, password: md5(loginForm.password) });
+			// globalStore.setToken(data.access_token);
+
+			// 2.添加动态路由
+			// await initDynamicRouter();
+
+			// 3.清除上个账号的 tab 信息
+			// tabsStore.closeMultipleTab();
+
+			// 4.跳转到首页
+			// router.push(HOME_URL);
+			// ElNotification({
+			// 	title: getTimeState(),
+			// 	message: "欢迎登录 Geeker-Admin",
+			// 	type: "success",
+			// 	duration: 3000
+			// });
+		} finally {
+			loading.value = false;
+		}
+	});
+};
 </script>
 <style scoped lang="scss">
 @import "../index.scss";
