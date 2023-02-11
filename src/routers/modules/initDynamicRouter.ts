@@ -1,4 +1,3 @@
-
 //  * @Author: zhangfuning 401645191@qq.com
 //  * @Date: 2023-02-11 15:21:52
 //  * @LastEditors: zhangfuning 401645191@qq.com
@@ -12,12 +11,12 @@
 // import { ElNotification } from "element-plus";
 // import { GlobalStore } from "@/stores";
 // import { AuthStore } from "@/stores/modules/auth";
-// // 引入iviews 文件夹下所有vue文件
+// 引入iviews 文件夹下所有vue文件
 // const modules = import.meta.glob("@/views/**/*.vue");
-// /**
-//  * @description: 初始化动态路由
-//  * @return {*}
-//  */
-// export const initDynamicRouter = async () => {
-// 	const AuthStore = AuthStore();
-// };
+/**
+ * @description: 初始化动态路由
+ * @return {*}
+ */
+export const initDynamicRouter = async () => {
+	// const AuthStore = AuthStore();
+};
