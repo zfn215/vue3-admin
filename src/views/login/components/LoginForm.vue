@@ -2,7 +2,7 @@
  * @Author: zhangfuning 401645191@qq.com
  * @Date: 2023-02-01 11:08:41
  * @LastEditors: zhangfuning 401645191@qq.com
- * @LastEditTime: 2023-02-03 11:00:12
+ * @LastEditTime: 2023-02-11 15:02:37
  * @FilePath: /vue3-admin/src/views/login/components/LoginForm.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -31,13 +31,16 @@
 	</div>
 </template>
 <script setup lang="ts">
-import { ref, reactive, onMounted } from "vue";
-import { useRouter } from "vue-router";
+import { ref, reactive } from "vue";
+// import { useRouter } from "vue-router";
 import { Login } from "@/api/interface/index";
 import { loginApi } from "@/api/modules/login";
+import { GlobalStore } from "@/stores";
+import { initDynamicRouter } from "@/routers/modules/dynamicRouter";
 import type { ElForm } from "element-plus";
 import md5 from "js-md5";
-const router = useRouter();
+// const router = useRouter();
+const globalStore = GlobalStore();
 // 定义form校验规则
 type FormInstance = InstanceType<typeof ElForm>;
 const loginFormRef = ref<FormInstance>();
@@ -55,10 +58,10 @@ const login = (formEl: FormInstance | undefined) => {
 		try {
 			// 1.执行登录接口
 			const { data } = await loginApi({ ...loginForm, password: md5(loginForm.password) });
-			// globalStore.setToken(data.access_token);
+			globalStore.setToken(data.access_token);
 
 			// 2.添加动态路由
-			// await initDynamicRouter();
+			await initDynamicRouter();
 
 			// 3.清除上个账号的 tab 信息
 			// tabsStore.closeMultipleTab();
