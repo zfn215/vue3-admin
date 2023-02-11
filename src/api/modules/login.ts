@@ -1,7 +1,7 @@
 import { Login } from "@/api/interface/index";
 import { PORT1 } from "@/api/config/servicePort";
-import { DynamicRouter } from "@/assets/json/dynamicRouter.json";
-import AuthButtons from "@/assets/json/authButtons.json";
+// import { DynamicRouter } from "@/assets/json/dynamicRouter.json";
+// import AuthButtons from "@/assets/json/authButtons.json";
 // import qs from "qs";
 import http from "@/api";
 /**

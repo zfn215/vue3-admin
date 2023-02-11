@@ -2,7 +2,7 @@
  * @Author: zhangfuning 401645191@qq.com
  * @Date: 2023-02-03 14:09:48
  * @LastEditors: zhangfuning 401645191@qq.com
- * @LastEditTime: 2023-02-11 11:34:16
+ * @LastEditTime: 2023-02-11 11:42:11
  * @FilePath: /vue3-admin/src/api/index.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -33,6 +33,7 @@ class RequestHttp {
 		 * token校验(JWT) : 接受服务器返回的token,存储到vuex/pinia/本地储存当中
 		 */
 		this.service.interceptors.request.use(
+			// @ts-expect-error
 			(config: AxiosRequestConfig) => {
 				const globalStore = GlobalStore();
 				// * 处理loading的显示和吟隐藏  { headers: { noLoading: true } }来控制不显示loading，参见loginApi
