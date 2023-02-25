@@ -2,7 +2,7 @@
  * @Author: zhangfuning 401645191@qq.com
  * @Date: 2023-01-30 15:39:06
  * @LastEditors: zhangfuning 401645191@qq.com
- * @LastEditTime: 2023-02-02 11:13:20
+ * @LastEditTime: 2023-02-25 15:55:38
  * @FilePath: /vue3-admin/vite.config.ts
  * @Description: 主页vite的配置
  */
@@ -49,7 +49,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 			// 跨域代理配置
 			proxy: {
 				"/api": {
-					target: "https://mock.mengxuegu.com/mock/629d727e6163854a32e8307e", // easymock
+					target: "https://mock.presstime.cn/mock/63f9bd170166fe5393c9adae", // easymock
 					// target: "https://www.fastmock.site/mock/f81e8333c1a9276214bcdbc170d9e0a0", // fastmock
 					changeOrigin: true,
 					rewrite: path => path.replace(/^\/api/, "")

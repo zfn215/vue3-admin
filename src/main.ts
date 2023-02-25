@@ -2,7 +2,7 @@
  * @Author: zhangfuning 401645191@qq.com
  * @Date: 2023-01-30 15:39:06
  * @LastEditors: zhangfuning 401645191@qq.com
- * @LastEditTime: 2023-02-02 17:58:57
+ * @LastEditTime: 2023-02-24 14:22:35
  * @FilePath: /vue3-admin/src/main.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -33,16 +33,18 @@ import directives from "@/directives/index";
 // vue Router
 import router from "@/routers/index";
 // vue i18n
-import I18n from "@/languages/index";
+// import I18n from "@/languages/index";
 // pinia store
 import pinia from "@/stores/index";
 // svg icons
 import "virtual:svg-icons-register";
 // errorHandler
 import errorHandler from "@/utils/errorHandler";
+const app = createApp(App);
+app.config.errorHandler = errorHandler;
+console.log(1);
 // 注册element Icons组件
 Object.keys(Icons).forEach(key => {
 	app.component(key, Icons[key as keyof typeof Icons]);
 });
-const app = createApp(App);
-app.use(router).use(directives).use(ElementPlus).use(I18n).use(pinia).use(errorHandler).mount("#app");
+app.use(router).use(directives).use(ElementPlus).use(pinia).mount("#app");

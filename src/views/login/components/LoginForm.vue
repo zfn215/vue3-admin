@@ -2,7 +2,7 @@
  * @Author: zhangfuning 401645191@qq.com
  * @Date: 2023-02-01 11:08:41
  * @LastEditors: zhangfuning 401645191@qq.com
- * @LastEditTime: 2023-02-23 14:35:26
+ * @LastEditTime: 2023-02-25 14:42:20
  * @FilePath: /vue3-admin/src/views/login/components/LoginForm.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -24,24 +24,31 @@
 		</el-form-item>
 	</el-form>
 	<div class="login-btn">
-		<!-- <el-button :icon="CircleClose" round @click="resetForm(loginFormRef)" size="large">重置</el-button> -->
-		<el-button round @click="login(loginFormRef)" size="large" type="primary" :loading="loading"> 登录 </el-button>
+		<el-button :icon="CircleClose" round @click="resetForm(loginFormRef)" size="large">重置</el-button>
+		<el-button :icon="UserFilled" round @click="login(loginFormRef)" size="large" type="primary" :loading="loading">
+			登录
+		</el-button>
 	</div>
 </template>
 <script setup lang="ts">
-import { ref, reactive } from "vue";
-// import { useRouter } from "vue-router";
+import { ref, reactive, onMounted } from "vue";
+import { useRouter } from "vue-router";
 import { Login } from "@/api/interface/index";
 import { loginApi } from "@/api/modules/login";
 import { GlobalStore } from "@/stores";
 import { TabsStore } from "@/stores/modules/tabs";
-// import { KeepAliveStore } from "@/stores/modules/keepAlive";
+import { KeepAliveStore } from "@/stores/modules/keepAlive";
 import { initDynamicRouter } from "@/routers/modules/dynamicRouter";
 import type { ElForm } from "element-plus";
+import { HOME_URL } from "@/config/config";
+import { getTimeState } from "@/utils/util";
+import { CircleClose, UserFilled } from "@element-plus/icons-vue";
+import { ElNotification } from "element-plus";
 import md5 from "js-md5";
-// const router = useRouter();
+const router = useRouter();
 const globalStore = GlobalStore();
 const tabsStore = TabsStore();
+const keepAlive = KeepAliveStore();
 
 // 定义form校验规则
 type FormInstance = InstanceType<typeof ElForm>;
@@ -52,6 +59,7 @@ const loginRules = reactive({
 });
 const loading = ref(false);
 const loginForm = reactive<Login.ReqLoginForm>({ username: "", password: "" });
+// ** 登录
 const login = (formEl: FormInstance | undefined) => {
 	if (!formEl) return;
 	formEl.validate(async valid => {
@@ -67,20 +75,35 @@ const login = (formEl: FormInstance | undefined) => {
 
 			// 3.清除上个账号的 tab 信息
 			tabsStore.closeMultipleTab();
-			// keepAlive.setKeepAliveName();
+			keepAlive.setKeepAliveName();
 			// 4.跳转到首页
-			// router.push(HOME_URL);
-			// ElNotification({
-			// 	title: getTimeState(),
-			// 	message: "欢迎登录 Geeker-Admin",
-			// 	type: "success",
-			// 	duration: 3000
-			// });
+			router.push(HOME_URL);
+			ElNotification({
+				title: getTimeState(),
+				message: "欢迎登录 Geeker-Admin",
+				type: "success",
+				duration: 3000
+			});
 		} finally {
 			loading.value = false;
 		}
 	});
 };
+// ** 重置for
+const resetForm = (formEl: FormInstance | undefined) => {
+	if (!formEl) return;
+	formEl.resetFields();
+};
+onMounted(() => {
+	// ** 监听enter事件 （调用登录）
+	document.onkeydown = (e: any) => {
+		e = window.event || e;
+		if (e.code === "Enter" || e.code === "enter" || e.code === "NumpadEnter") {
+			if (loading.value) return;
+			login(loginFormRef.value);
+		}
+	};
+});
 </script>
 <style scoped lang="scss">
 @import "../index.scss";
