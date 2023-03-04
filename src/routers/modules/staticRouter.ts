@@ -1,16 +1,8 @@
 /*
  * @Author: zhangfuning 401645191@qq.com
- * @Date: 2023-02-10 19:59:10
- * @LastEditors: zhangfuning 401645191@qq.com
- * @LastEditTime: 2023-02-23 17:43:25
- * @FilePath: /vue3-admin/src/routers/modules/staticRouter.ts
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- */
-/*
- * @Author: zhangfuning 401645191@qq.com
  * @Date: 2023-02-01 14:21:46
  * @LastEditors: zhangfuning 401645191@qq.com
- * @LastEditTime: 2023-02-02 17:28:27
+ * @LastEditTime: 2023-03-04 14:55:47
  * @FilePath: /vue3-admin/src/routers/modules/staticRouter.ts
  * @Description: 静态路由
  */
@@ -32,6 +24,14 @@ export const staticRouter: RouteRecordRaw[] = [
 		meta: {
 			title: "登录"
 		}
+	},
+	{
+		path: "/layout",
+		name: "layout",
+		component: () => import("@/layouts/index.vue"),
+		// component: () => import("@/layouts/indexAsync.vue"),
+		redirect: HOME_URL,
+		children: []
 	}
 ];
 /**

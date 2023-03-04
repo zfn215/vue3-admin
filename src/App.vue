@@ -2,10 +2,39 @@
  * @Author: zhangfuning 401645191@qq.com
  * @Date: 2023-01-30 15:39:06
  * @LastEditors: zhangfuning 401645191@qq.com
- * @LastEditTime: 2023-01-31 14:09:00
+ * @LastEditTime: 2023-03-04 16:29:24
  * @FilePath: /vue3-admin/src/App.vue
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @Description: element内置组件
 -->
 <template>
-	<router-view></router-view>
+	<el-config-provider :locale="i18nLocale" :button="config" :size="assemblySize">
+		<router-view></router-view>
+	</el-config-provider>
 </template>
+
+<script setup lang="ts">
+import { reactive, computed } from "vue";
+import { GlobalStore } from "./stores";
+import { useTheme } from "@/hooks/useTheme";
+import { getBrowserLang } from "@/utils/util";
+import { ElConfigProvider } from "element-plus";
+import zhCn from "element-plus/es/locale/lang/zh-cn";
+import en from "element-plus/es/locale/lang/en";
+// ** 初始化主题配置
+const { initTheme } = useTheme();
+initTheme();
+const globalStore = GlobalStore();
+// ** 配置element 按钮文字中间是否有空格
+const config = reactive({
+	autoInsertSpace: false
+});
+console.log("app");
+// ** 语言配置
+const i18nLocale = computed(() => {
+	if (globalStore.language && globalStore.language == "zh") return zhCn;
+	if (globalStore.language == "en") return en;
+	return getBrowserLang() == "zh" ? zhCn : en;
+});
+// ** 配置全局组件大小
+const assemblySize = computed(() => globalStore.assemblySize);
+</script>

@@ -2,7 +2,7 @@
  * @Author: zhangfuning 401645191@qq.com
  * @Date: 2023-01-30 15:39:06
  * @LastEditors: zhangfuning 401645191@qq.com
- * @LastEditTime: 2023-02-24 14:22:35
+ * @LastEditTime: 2023-03-04 14:05:55
  * @FilePath: /vue3-admin/src/main.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -33,7 +33,7 @@ import directives from "@/directives/index";
 // vue Router
 import router from "@/routers/index";
 // vue i18n
-// import I18n from "@/languages/index";
+import I18n from "@/languages/index";
 // pinia store
 import pinia from "@/stores/index";
 // svg icons
@@ -47,4 +47,4 @@ console.log(1);
 Object.keys(Icons).forEach(key => {
 	app.component(key, Icons[key as keyof typeof Icons]);
 });
-app.use(router).use(directives).use(ElementPlus).use(pinia).mount("#app");
+app.use(router).use(I18n).use(directives).use(ElementPlus).use(pinia).mount("#app");

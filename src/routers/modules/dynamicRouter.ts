@@ -2,17 +2,10 @@
  * @Author: zhangfuning 401645191@qq.com
  * @Date: 2023-02-11 15:21:52
  * @LastEditors: zhangfuning 401645191@qq.com
- * @LastEditTime: 2023-02-23 11:16:48
+ * @LastEditTime: 2023-03-04 15:33:20
  * @FilePath: /vue3-admin/src/routers/modules/dynamicRouter.ts
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE()
+ * @Description:动态添加路由
  */
-//  * @Author: zhangfuning 401645191@qq.com
-//  * @Date: 2023-02-11 15:21:52
-//  * @LastEditors: zhangfuning 401645191@qq.com
-//  * @LastEditTime: 2023-02-11 15:36:18
-//  * @FilePath: /vue3-admin/src/routers/modules/initDynamicRouter.ts
-//  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
-//  */
 import router from "@/routers/index";
 import { isType } from "@/utils/util";
 import { ElNotification } from "element-plus";
@@ -29,7 +22,7 @@ const modules = import.meta.glob("@/views/**/*.vue");
 export const initDynamicRouter = async () => {
 	const authStore = AuthStore();
 	const globalStore = GlobalStore();
-	console.log(globalStore);
+	console.log("动态添加路由");
 	try {
 		// ** 获取菜单列表和按钮列表 可合并
 		await authStore.getAuthMenuList();

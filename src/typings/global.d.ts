@@ -1,5 +1,6 @@
 declare namespace Menu {
 	interface MenuOptions {
+[x: string]: any;
 		path: string;
 		name: string;
 		component?: string | (() => Promise<any>);

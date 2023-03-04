@@ -2,7 +2,7 @@
  * @Author: zhangfuning 401645191@qq.com
  * @Date: 2023-02-11 16:58:48
  * @LastEditors: zhangfuning 401645191@qq.com
- * @LastEditTime: 2023-02-23 17:08:24
+ * @LastEditTime: 2023-03-01 16:25:07
  * @FilePath: /vue3-admin/src/utils/util.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置:
  */
@@ -25,7 +25,6 @@ export function getFlatArr(menuList: Menu.MenuOptions) {
 	let newMenuList: Menu.MenuOptions[] = JSON.parse(JSON.stringify(menuList));
 	return newMenuList.reduce((pre: Menu.MenuOptions[], current: Menu.MenuOptions) => {
 		let flatArr = [...pre, current];
-		// @ts-expect-error
 		if (current.children) flatArr = [...flatArr, ...getFlatArr(current.children)];
 		return flatArr;
 	}, []);
@@ -38,9 +37,8 @@ export function getFlatArr(menuList: Menu.MenuOptions) {
 export function getShowMenuList(menuList: Menu.MenuOptions[]) {
 	let newMenuList: Menu.MenuOptions[] = JSON.parse(JSON.stringify(menuList));
 	return newMenuList.filter(item => {
-		// @ts-expect-error
 		item.children?.length && (item.children = getShowMenuList(item.children));
-		// @ts-expect-error
+
 		return !item.meta?.isHide;
 	});
 }
@@ -54,7 +52,6 @@ export function getShowMenuList(menuList: Menu.MenuOptions[]) {
 export const getAllBreadcrumbList = (menuList: Menu.MenuOptions[], result: { [key: string]: any } = {}, parent = []) => {
 	for (const item of menuList) {
 		result[item.path] = [...parent, item];
-		// @ts-expect-error
 		if (item.children) getAllBreadcrumbList(item.children, result, result[item.path]);
 	}
 	return result;
@@ -74,4 +71,19 @@ export function getTimeState() {
 	if (hours >= 14 && hours <= 18) return `下午好 🌞`;
 	if (hours >= 18 && hours <= 24) return `晚上好 🌛`;
 	if (hours >= 0 && hours <= 6) return `凌晨好 🌛`;
+}
+/**
+ * @description: 获取浏览器默认语言
+ * @return {*}
+ */
+export function getBrowserLang() {
+	// @ts-expect-error
+	let browserLang = navigator.language ? navigator.language : navigator.browserLanguage;
+	let defaultBrowserLang = "";
+	if (browserLang.toLowerCase() === "cn" || browserLang.toLowerCase() === "zh" || browserLang.toLowerCase() === "zh-cn") {
+		defaultBrowserLang = "zh";
+	} else {
+		defaultBrowserLang = "en";
+	}
+	return defaultBrowserLang;
 }

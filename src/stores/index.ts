@@ -2,7 +2,7 @@
  * @Author: zhangfuning 401645191@qq.com
  * @Date: 2023-02-02 18:00:47
  * @LastEditors: zhangfuning 401645191@qq.com
- * @LastEditTime: 2023-02-03 16:51:16
+ * @LastEditTime: 2023-03-04 16:35:14
  * @FilePath: /vue3-admin/src/stores/index.ts
  * @Description: 初始化pinia
  */
@@ -26,7 +26,7 @@ export const GlobalStore = defineStore({
 		// themeConfig
 		themeConfig: {
 			// 布局切换 ==>  纵向：vertical | 经典：classic | 横向：transverse | 分栏：columns
-			layout: "vertical",
+			layout: "classic",
 			// 默认 primary 主题颜色
 			primary: DEFAULT_PRIMARY,
 			// 深色模式
@@ -71,6 +71,7 @@ export const GlobalStore = defineStore({
 		},
 		// setThemeConfig
 		setThemeConfig(themeConfig: ThemeConfigProps) {
+			console.log(themeConfig);
 			this.themeConfig = themeConfig;
 		}
 	},

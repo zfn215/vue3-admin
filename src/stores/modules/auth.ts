@@ -2,7 +2,7 @@
  * @Author: zhangfuning 401645191@qq.com
  * @Date: 2023-02-11 15:41:35
  * @LastEditors: zhangfuning 401645191@qq.com
- * @LastEditTime: 2023-02-22 14:12:09
+ * @LastEditTime: 2023-03-04 15:41:51
  * @FilePath: /vue3-admin/src/stores/modules/auth.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -43,6 +43,7 @@ export const AuthStore = defineStore({
 		// 获取菜单列表
 		async getAuthMenuList() {
 			const { data } = await getAuthMenuListApi();
+			console.log(data);
 			this.authMenuList = data;
 		},
 		// 设置路由名称

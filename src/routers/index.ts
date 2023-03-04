@@ -2,7 +2,7 @@
  * @Author: zhangfuning 401645191@qq.com
  * @Date: 2023-02-01 11:21:55
  * @LastEditors: zhangfuning 401645191@qq.com
- * @LastEditTime: 2023-02-24 17:09:33
+ * @LastEditTime: 2023-02-27 14:00:05
  * @FilePath: /vue3-admin/src/routers/index.ts
  * @Description: 系统路由
  */
@@ -12,6 +12,7 @@ import { staticRouter } from "./modules/staticRouter";
 import NProgress from "@/config/nprogress";
 import { LOGIN_URL, ROUTER_WHITE_LIST } from "@/config/config";
 import { AuthStore } from "@/stores/modules/auth";
+import { initDynamicRouter } from "./modules/dynamicRouter";
 console.log(staticRouter);
 /**
  * @description: 动态路由参数配置简介
@@ -29,7 +30,7 @@ console.log(staticRouter);
  * @param meta.isAffix ==> 是否固定在 tabs nav
  * @param meta.isKeepAlive ==> 是否缓存
  */
-console.log(1);
+console.log("router");
 const router = createRouter({
 	history: createWebHashHistory(),
 	routes: [...staticRouter],
@@ -43,21 +44,30 @@ console.log(router);
  */
 router.beforeEach(async (to, from, next) => {
 	const globalStore = GlobalStore();
-	// ** 路由开始跳转
+	// ** 1路由开始跳转
 	NProgress.start();
-	// ** 动态设置标题
+	// ** 2动态设置标题
 	const title = import.meta.env.VITE_GLOB_APP_TITLE;
 	document.title = to.meta.title ? `${to.meta.title}-${title}` : title;
-	// ** 没有token重置路由
+	// ** 3没有token重置路由
 	if (to.path === LOGIN_URL) {
 		if (globalStore.token) return next(from.fullPath);
 		resetRouter();
 		return next();
 	}
-	// ** 3判断是否在白名单中 存在直接放行
+	// ** 4判断是否在白名单中 存在直接放行
 	if (ROUTER_WHITE_LIST.includes(to.path)) return next();
-	// ** 判断是否有token 没有重定向到login
+	// ** 5判断是否有token 没有重定向到login
 	if (!globalStore.token) return next({ path: LOGIN_URL, replace: true });
+	// ** 6如果没有菜单列表 就重新请求菜单列表并添加动态路由
+	const authStore = AuthStore();
+	authStore.setRouterName(to.name as string);
+	if (!authStore.authMenuListGet.length) {
+		await initDynamicRouter();
+		return next({ ...to, replace: true });
+	}
+	// 7.正常访问页面
+	next();
 });
 /**
  * @description: 重置路由
