@@ -1,5 +1,13 @@
+<!--
+ * @Author: zhangfuning 401645191@qq.com
+ * @Date: 2023-03-01 17:01:20
+ * @LastEditors: zhangfuning 401645191@qq.com
+ * @LastEditTime: 2023-03-06 15:20:42
+ * @FilePath: /vue3-admin/src/layouts/components/Main/components/Maximize.vue
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 <template>
-	<div class="maxmize" @click="exitMaximize">
+	<div class="maximize" @click="exitMaximize">
 		<!-- 最大化 -->
 		<el-icon><Close /></el-icon>
 	</div>
