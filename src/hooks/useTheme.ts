@@ -2,7 +2,7 @@
  * @Author: zhangfuning 401645191@qq.com
  * @Date: 2023-02-27 17:29:00
  * @LastEditors: zhangfuning 401645191@qq.com
- * @LastEditTime: 2023-02-28 15:37:21
+ * @LastEditTime: 2023-03-06 17:26:23
  * @FilePath: /vue3-admin/src/hooks/useTheme.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -56,7 +56,7 @@ export const useTheme = () => {
 		if (!value) return body.setAttribute("style", "");
 		if (type === "grey") body.setAttribute("style", "filter:grayscale(1)");
 		if (type === "weak") body.setAttribute("style", "filter:invert(80%)");
-		let propName = (type = "grey" ? "isWeak" : "isGrey");
+		let propName = type == "grey" ? "isWeak" : "isGrey";
 		globalStore.setThemeConfig({ ...themeConfig.value, [propName]: false });
 	};
 	// ** 初始化 theme 配置

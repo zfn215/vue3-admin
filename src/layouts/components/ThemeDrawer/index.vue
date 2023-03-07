@@ -2,7 +2,7 @@
  * @Author: zhangfuning 401645191@qq.com
  * @Date: 2023-03-03 17:10:54
  * @LastEditors: zhangfuning 401645191@qq.com
- * @LastEditTime: 2023-03-04 15:51:45
+ * @LastEditTime: 2023-03-06 17:37:49
  * @FilePath: /vue3-admin/src/layouts/components/ThemeDrawer/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -75,7 +75,7 @@
 		</div>
 		<div class="theme-item">
 			<span>暗黑模式</span>
-			<!-- <SwitchDark></SwitchDark> -->
+			<SwitchDark></SwitchDark>
 		</div>
 		<div class="theme-item">
 			<span>灰色模式</span>
@@ -124,7 +124,7 @@ import { useTheme } from "@/hooks/useTheme";
 import { GlobalStore } from "@/stores";
 import { LayoutType } from "@/stores/interface";
 import { DEFAULT_PRIMARY } from "@/config/config";
-// import SwitchDark from "@/components/SwitchDark/index.vue";
+import SwitchDark from "@/components/SwitchDark/index.vue";
 import mittBus from "@/utils/mittBus";
 const { changeGreyOrWeak, changePrimary } = useTheme();
 // 预定义主题颜色
