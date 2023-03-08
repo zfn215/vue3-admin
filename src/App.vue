@@ -2,7 +2,7 @@
  * @Author: zhangfuning 401645191@qq.com
  * @Date: 2023-01-30 15:39:06
  * @LastEditors: zhangfuning 401645191@qq.com
- * @LastEditTime: 2023-03-04 16:29:24
+ * @LastEditTime: 2023-03-08 11:17:45
  * @FilePath: /vue3-admin/src/App.vue
  * @Description: element内置组件
 -->
@@ -28,7 +28,6 @@ const globalStore = GlobalStore();
 const config = reactive({
 	autoInsertSpace: false
 });
-console.log("app");
 // ** 语言配置
 const i18nLocale = computed(() => {
 	if (globalStore.language && globalStore.language == "zh") return zhCn;

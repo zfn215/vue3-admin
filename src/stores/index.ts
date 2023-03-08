@@ -2,12 +2,12 @@
  * @Author: zhangfuning 401645191@qq.com
  * @Date: 2023-02-02 18:00:47
  * @LastEditors: zhangfuning 401645191@qq.com
- * @LastEditTime: 2023-03-04 16:35:14
+ * @LastEditTime: 2023-03-08 11:10:25
  * @FilePath: /vue3-admin/src/stores/index.ts
  * @Description: 初始化pinia
  */
 import { defineStore, createPinia } from "pinia";
-import { GlobalState, ThemeConfigProps } from "./interface";
+import { GlobalState, ThemeConfigProps, AssemblySizeType } from "./interface";
 import { DEFAULT_PRIMARY } from "@/config/config";
 import piniaPersistConfig from "@/config/piniaPersist";
 import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
@@ -62,7 +62,7 @@ export const GlobalStore = defineStore({
 			this.userInfo = userInfo;
 		},
 		// setAssemblySizeSize
-		setAssemblySizeSize(assemblySize: string) {
+		setAssemblySizeSize(assemblySize: AssemblySizeType) {
 			this.assemblySize = assemblySize;
 		},
 		// updateLanguage
